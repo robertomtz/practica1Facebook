@@ -30,16 +30,19 @@ function comenta() {
 
   var comment = document.createElement("a");
   comment.setAttribute("class","linkInt");
+  comment.setAttribute("href","#");
   nombre = document.createTextNode(" Comment ");
   comment.appendChild(nombre);
 
   var like = document.createElement("a");
   like.setAttribute("class","linkInt");
   nombre = document.createTextNode(" Like ");
+  like.setAttribute("href","#");
   like.appendChild(nombre);
 
   var share = document.createElement("a");
   share.setAttribute("class","linkInt");
+  share.setAttribute("href","#");
   nombre = document.createTextNode(" Share ");
   share.appendChild(nombre);
 
