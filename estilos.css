@@ -1,0 +1,115 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma", "Lucida Grande", sans-serif;
+  font-weight: 300;
+  font-size:14px;
+}
+
+
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border: .5px solid #333;
+  background-color: #3b5998;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.perfil-menu{
+  width:40px;
+  height:40px;
+}
+
+.banner{
+  color:#fff;
+  font-size:18px;
+  font-weight: bold;
+  padding-left:5px;
+}
+
+.font-menu{
+  color:#fff;
+  padding-right:25px;
+  font-size:16px;
+  position:relative;
+  top:-13px;
+}
+
+#contenido {
+  margin-top: 40px;
+  width:80%;
+  padding-top: 20px;
+  padding-left: 10%;
+}
+
+.mensaje {
+  width: 100%;
+  display: block;
+}
+
+button {
+  background-color: #3b5998;
+  color:#fff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid;
+  border-radius: 2px;
+  cursor: pointer;
+  padding:5px;
+}
+
+.envuelveBoton{
+  padding-top:15px;
+}
+
+.perfilComentario{
+  width: 100px;
+  height: 100px;
+  float:left;
+}
+
+.tituloComentario{
+  color: #3b5998;
+  font-size:18px;
+  font-weight: bold;
+  padding-left:8px;
+}
+
+.textoComentario{
+  padding-left:108px;
+  display:block;
+}
+
+.interacciones{
+  padding-left:108px;
+  padding-top:20px;
+}
+
+.tiempo{
+  color:#333;
+  font-size:12px;
+}
+
+.linkInt{
+  text-decoration: none;
+}
+
+.comentario{
+  display:block;
+  float:left;
+  width:100%;
+  padding-top:10px;
+  border: .5px solid #333;
+}
