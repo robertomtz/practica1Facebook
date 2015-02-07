@@ -28,7 +28,7 @@ function comenta() {
   var tiempo = document.createElement("span");
   tiempo.setAttribute("class","tiempo");
   var id = Math.floor(Date.now() / 60000);
-  tiempo.setAttribute("id","id");
+  tiempo.setAttribute("id",id);
   nombre = document.createTextNode(" 0 Minutes ago ");
   tiempo.appendChild(nombre);
 
@@ -68,9 +68,7 @@ function comenta() {
 
   numCom++;
   borraCaja();
-
-  var tiempo =Math.floor(Date.now() / 1000);
-  console.log(tiempo);
+  actualizaTiempo();
 }
 
 
@@ -78,6 +76,16 @@ function borraCaja(){
   //console.log("hola");
   var area = document.getElementById("mensaje");
   area.value="";
+}
+
+function actualizaTiempo(){
+  var tiempos = document.getElementsByClassName('tiempo');
+  for (var a=0; a<tiempos.length; a++){
+    var primerTiempo = tiempos[a].id;
+    var tiempoActual = Math.floor(Date.now() / 60000);
+    var tiempoTrans = tiempoActual - primerTiempo;
+    tiempos[a].innerHTML= " " +tiempoTrans +" Minutes ago ";
+  }
 }
 
 function funcLike(com){
