@@ -1,3 +1,5 @@
+var numCom=0;
+
 function comenta() {
   var mensaje = document.getElementById("mensaje");
   mensaje=mensaje.value;
@@ -25,6 +27,8 @@ function comenta() {
 
   var tiempo = document.createElement("span");
   tiempo.setAttribute("class","tiempo");
+  var id = Math.floor(Date.now() / 60000);
+  tiempo.setAttribute("id","id");
   nombre = document.createTextNode(" 0 Minutes ago ");
   tiempo.appendChild(nombre);
 
@@ -36,6 +40,8 @@ function comenta() {
 
   var like = document.createElement("a");
   like.setAttribute("class","linkInt");
+  like.setAttribute("id","com"+numCom);
+  like.setAttribute("onClick","funcLike(com"+numCom+")");
   nombre = document.createTextNode(" Like ");
   like.setAttribute("href","#");
   like.appendChild(nombre);
@@ -59,4 +65,25 @@ function comenta() {
   comentario.appendChild(interacciones);
 
   contenido.appendChild(comentario);
+
+  numCom++;
+  borraCaja();
+
+  var tiempo =Math.floor(Date.now() / 1000);
+  console.log(tiempo);
+}
+
+
+function borraCaja(){
+  //console.log("hola");
+  var area = document.getElementById("mensaje");
+  area.value="";
+}
+
+function funcLike(com){
+  //console.log(com);
+  if (com.innerHTML==" Like ")
+    com.innerHTML=" Unlike ";
+  else
+    com.innerHTML=" Like ";
 }
