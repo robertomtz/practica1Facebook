@@ -10,7 +10,7 @@ function comenta() {
 
   var perfilComentario = document.createElement("img");
   perfilComentario.setAttribute("class","perfilComentario");
-  perfilComentario.setAttribute("src","perfil.jpg");
+  perfilComentario.setAttribute("src","img/perfil.jpg");
 
   var tituloComentario = document.createElement("span");
   tituloComentario.setAttribute("class","tituloComentario");
@@ -31,6 +31,7 @@ function comenta() {
   tiempo.setAttribute("id",id);
   nombre = document.createTextNode(" 0 Minutes ago ");
   tiempo.appendChild(nombre);
+  console.log(id);
 
   var comment = document.createElement("a");
   comment.setAttribute("class","linkInt");
