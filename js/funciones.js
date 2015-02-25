@@ -71,7 +71,24 @@ function comenta() {
   numCom++;
   borraCaja();
   actualizaTiempo();
+  guardarComentario(mensaje,id);
 }
+
+function guardarComentario(mensaje,time){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+        var textoResp =xmlhttp.responseText;
+        if(!textoResp){}else{
+          console.log("Error!")
+        }
+    }
+  }
+  xmlhttp.open("POST", "php/guardar.php", true);
+  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  xmlhttp.send("mensaje=" + mensaje +"&time=" +time);
+}
+
 
 function crearComentariosCargados(usuario, cmm, timestamp) {
 
