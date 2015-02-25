@@ -1,3 +1,2 @@
 # Practica Facebook
-
-## Simulación de comentarios
+Simulación de comentarios
