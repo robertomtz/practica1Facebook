@@ -18,7 +18,7 @@
     <div id="contenido">
       <textarea placeholder="What's on your mind?" class="mensaje" id="mensaje" autofocus></textarea>
       <div class="envuelveBoton">
-        <button class="botonComenta" onClick="comenta()">Comment</button>
+        <button class="botonComenta" onClick="guardarComentario()">Comment</button>
       </div>
 
       <hr>
@@ -34,9 +34,12 @@
         </div>
 
         INSERT INTO `p2_labweb`.`Comentarios` (`id`, `usuario`, `comentario`, `timestamp`) VALUES ('0', 'Roberto Mtz', 'Hola soy robi!', '23747032');
-        
+
       </div> -->
 
+      <!--<div class="error">
+        <span>Mensaje error</span>
+      </div>-->
 
     </div>
 

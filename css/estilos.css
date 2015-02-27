@@ -7,6 +7,17 @@ body {
   font-size:14px;
 }
 
+.error{
+  position: fixed;
+  left: 0;
+  top: ;
+  z-index: 9999;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border: .5px solid #333;
+  background-color: #3b5998;
+}
 
 .menu {
   position: fixed;

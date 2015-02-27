@@ -1,10 +1,10 @@
 var numCom=0;
 cargarComentarios();
 
-function comenta() {
+function comenta(id) {
   var mensaje = document.getElementById("mensaje");
   mensaje=mensaje.value;
-  console.log(mensaje);
+  //console.log(mensaje);
 
   var comentario = document.createElement("div");
   comentario.setAttribute("class","comentario");
@@ -28,21 +28,23 @@ function comenta() {
 
   var tiempo = document.createElement("span");
   tiempo.setAttribute("class","tiempo");
-  var id = Math.floor(Date.now() / 60000);
+  //var id = Math.floor(Date.now() / 60000);
   tiempo.setAttribute("id",id);
   nombre = document.createTextNode(" 0 Minutes ago ");
   tiempo.appendChild(nombre);
-  console.log(id);
+  //console.log(id);
 
   var comment = document.createElement("a");
   comment.setAttribute("class","linkInt");
   comment.setAttribute("href","#");
+  comment.setAttribute("title", "Leave a comment");
   nombre = document.createTextNode(" Comment ");
   comment.appendChild(nombre);
 
   var like = document.createElement("a");
   like.setAttribute("class","linkInt");
   like.setAttribute("id","com"+numCom);
+  like.setAttribute("title", "Like this comment");
   like.setAttribute("onClick","funcLike(com"+numCom+")");
   nombre = document.createTextNode(" Like ");
   like.setAttribute("href","#");
@@ -66,33 +68,51 @@ function comenta() {
   comentario.appendChild(textoComentario);
   comentario.appendChild(interacciones);
 
-  contenido.appendChild(comentario);
+  contenido.insertBefore(comentario, contenido.children[3]);
 
   numCom++;
   borraCaja();
   actualizaTiempo();
-  guardarComentario(mensaje,id);
 }
 
-function guardarComentario(mensaje,time){
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-        var textoResp =xmlhttp.responseText;
-        if(!textoResp){}else{
-          console.log("Error!")
-        }
+function crearError(mens){
+  //var comentario = document.createElement("div");
+  //console.log(mens);
+  alert(mens);
+
+  /*var textoError = document.createElement("span");
+  nombre = document.createTextNode(mens);
+  textoError.appendChild(nombre);
+
+  var contenido = document.getElementById("contenido");
+  contenido.appendChild(comentario);
+  console.log("herror");*/
+}
+
+function guardarComentario(){
+  var time = Math.floor(Date.now() / 60000);
+  var mensaje = document.getElementById("mensaje");
+  mensaje=mensaje.value;
+  if(mensaje!=""){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      var textoResp =xmlhttp.responseText;
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+          var textoResp =xmlhttp.responseText;
+          if(!textoResp){
+            comenta(time);
+          }else{crearError(textoResp);}
+      }
     }
+    document.getElementById("mensaje").focus();
+    xmlhttp.open("POST", "php/guardar.php", true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("mensaje=" + mensaje +"&time=" +time);
   }
-  xmlhttp.open("POST", "php/guardar.php", true);
-  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  xmlhttp.send("mensaje=" + mensaje +"&time=" +time);
 }
 
 
 function crearComentariosCargados(usuario, cmm, timestamp) {
-
-  console.log("hola");
 
   var comentario = document.createElement("div");
   comentario.setAttribute("class","comentario");
@@ -120,17 +140,19 @@ function crearComentariosCargados(usuario, cmm, timestamp) {
   tiempo.setAttribute("id",id);
   nombre = document.createTextNode(" 0 Minutes ago ");
   tiempo.appendChild(nombre);
-  console.log(id);
+  //console.log(id);
 
   var comment = document.createElement("a");
   comment.setAttribute("class","linkInt");
   comment.setAttribute("href","#");
+  comment.setAttribute("title", "Leave a comment");
   nombre = document.createTextNode(" Comment ");
   comment.appendChild(nombre);
 
   var like = document.createElement("a");
   like.setAttribute("class","linkInt");
   like.setAttribute("id","com"+numCom);
+  like.setAttribute("title", "Like this comment");
   like.setAttribute("onClick","funcLike(com"+numCom+")");
   nombre = document.createTextNode(" Like ");
   like.setAttribute("href","#");
@@ -162,7 +184,6 @@ function crearComentariosCargados(usuario, cmm, timestamp) {
 }
 
 function borraCaja(){
-  //console.log("hola");
   var area = document.getElementById("mensaje");
   area.value="";
 }
@@ -178,7 +199,6 @@ function actualizaTiempo(){
 }
 
 function funcLike(com){
-  //console.log(com);
   if (com.innerHTML==" Like ")
     com.innerHTML=" Unlike ";
   else
@@ -191,11 +211,12 @@ function cargarComentarios() {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
               var jsonComentarios = JSON.parse(xmlhttp.responseText);
-              for (var x=0; x<jsonComentarios.length; x++) {
+              for (var x=jsonComentarios.length-1; x>=0; x--) {
                 crearComentariosCargados(jsonComentarios[x].usuario, jsonComentarios[x].comentario, jsonComentarios[x].timestamp);
               }
             }
         }
+        //document.getElementById("mensaje").focus();
         xmlhttp.open("POST", "php/cargar.php", true);
         xmlhttp.send();
   }
